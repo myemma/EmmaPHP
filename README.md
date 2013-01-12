@@ -1,22 +1,18 @@
 emma-wrapper-php
----
+================
 
 A PHP wrapper for Emma's API.
----
 
-### Examples
----
+## Examples
 Wrapper includes methods to help with performing HTTP requests to MyEmma's public API
 
-### Instantiate Myemma API Class
----
+## Instantiate Myemma API Class
 ``` php
 <?php
 $em = new Myemmapi("xxx", "xxx", "xxx");
 ```
 
-### GET
----
+## GET
 ``` php
 <?php
 try {
@@ -27,8 +23,7 @@ try {
 }
 ```
 
-### POST
----
+## POST
 ``` php
 <?php
 try {
@@ -47,8 +42,7 @@ try {
 }
 ```
 
-### PUT
----
+## PUT
 ``` php
 <?php
 try {
@@ -67,8 +61,7 @@ try {
 }
 ```
 
-### DELETE
----
+## DELETE
 ``` php
 <?php
 try {
