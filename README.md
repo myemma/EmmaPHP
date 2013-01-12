@@ -11,7 +11,7 @@ Wrapper includes methods to help with performing HTTP requests to MyEmma's publi
 <?php
 $em = new Myemmapi("xxx", "xxx", "xxx");
 ```
-### Get
+### GET
 ``` php
 <?php
 try {
@@ -23,7 +23,7 @@ try {
 ```
 
 ### POST
-```
+``` php
 <?php
 try {
 	$data = array(
