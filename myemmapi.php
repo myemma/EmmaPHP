@@ -126,7 +126,7 @@
 			curl_close($ch);
 			
 			if($this->_validResponseCode($info['http_code'])) {
-				return json_encode($data);
+				return $data;
 			} else {
 				throw new Myemmapi_Invalid_Response_Exception(null, 0, $data, $info['http_code']);
 			}
