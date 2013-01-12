@@ -4,7 +4,8 @@ emma-wrapper-php
 A PHP wrapper for Emma's API.
 
 ### Examples
-Wrapper includes methods to help with performing HTTP requests to MyEmma's public API 
+Wrapper includes methods to help with performing HTTP requests to MyEmma's public API
+<a href="#get-example" class="anchor" name="get-example">
 ### Get
 ```php
 	<?php
