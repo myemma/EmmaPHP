@@ -42,6 +42,12 @@
 		* @access public
 		*/
 		function __construct($account_id, $pub_api_key, $pri_api_key) {
+			if(empty($account_id))
+				throw new Myemmapi_Missing_Account_Id();
+			
+			if(empty($pub_api_key) || empty($pri_api_key))
+				throw new Myemmapi_Missing_Auth_For_Request();
+			
 			$this->_account_id = $account_id;
 			$this->_pub_key = $pub_api_key;
 			$this->_priv_key = $pri_api_key;
@@ -105,7 +111,7 @@
 		* @return json encoded array of information from API request
 		* @access private
 		*/
-		private function _request($url, $verb = null) {
+		protected function _request($url, $verb = null) {
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_USERPWD, "{$this->_pub_key}:{$this->_priv_key}");
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -139,7 +145,7 @@
 		* @return string $url
 		* @access private
 		*/
-		private function _buildUrl($path, $params = array()) {
+		protected function _buildUrl($path, $params = array()) {
 			$url = $this->base_url . $this->_account_id;
 			$url .= $path;
 			$url .= (count($params)) ? '?' . http_build_query($params) : '';
@@ -153,7 +159,7 @@
 		* @return boolean
 		* @access private
 		*/
-		private function _validResponseCode($code) {
+		protected function _validResponseCode($code) {
 			return (bool)preg_match('/^20[0-9]{1}/', $code);
 		}
 	}
