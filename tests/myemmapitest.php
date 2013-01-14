@@ -5,7 +5,7 @@
 		protected $my;
 		
 		public function setUp() {
-			$this->my = new Myemmapi_Expose('1718788', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
+			$this->my = new Myemmapi_Test_Helper('1718788', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
 		}
 		
 		public function teardown() {
@@ -13,26 +13,26 @@
 		}
 		
 		public function testResponseCodeSuccess() {
-			self::assertTrue($this->my->validHttpResponseCode(200));
+			$this->assertTrue($this->my->validHttpResponseCode(200));
 		}
 		
 		public function testResponseCodeServerError() {
-			self::assertFalse($this->my->validHttpResponseCode(500));
+			$this->assertFalse($this->my->validHttpResponseCode(500));
 		}
 		
 		public function testResponseCodeClientError() {
-			self::assertFalse($this->my->validHttpResponseCode(400));
+			$this->assertFalse($this->my->validHttpResponseCode(400));
 		}
 		
 		public function testBuildUrl() {
-			self::assertEquals(
+			$this->assertEquals(
 				'https://api.e2ma.net/1718788/groups',
 				$this->my->constructUrl('/groups')
 			);
 		}
 		
 		public function testBuildUrlWithQueryParams() {
-			self::assertEquals(
+			$this->assertEquals(
 				'https://api.e2ma.net/1718788/groups?group_types=g',
 				$this->my->constructUrl('/groups', array('group_types' => 'g'))
 			);

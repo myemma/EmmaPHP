@@ -7,7 +7,7 @@
 
 	require_once 'myemmapi.php';
 	
-	class Myemmapi_Expose extends Myemmapi {
+	class Myemmapi_Test_Helper extends Myemmapi {
 		function __construct($account_id, $pub_key, $priv_key) {
 			parent::__construct($account_id, $pub_key, $priv_key);
 		}
