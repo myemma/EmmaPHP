@@ -12,11 +12,11 @@
 			parent::__construct($account_id, $pub_key, $priv_key);
 		}
 		
-		function validResponseCode($code) {
-			return $this->_validResponseCode($code);
+		function validHttpResponseCode($code) {
+			return $this->_validHttpResponseCode($code);
 		}
 		
-		function buildUrl($url, $params = array()) {
-			return $this->_buildUrl($url, $params);
+		function constructUrl($url, $params = array()) {
+			return $this->_constructUrl($url, $params);
 		}
 	}

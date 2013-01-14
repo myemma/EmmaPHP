@@ -61,7 +61,7 @@
 		* @access public
 		*/
 		function get($path, $params = array()) {
-			$url = $this->_buildUrl($path, $params);
+			$url = $this->_constructUrl($path, $params);
 			
 			return $this->_request($url);
 		}
@@ -74,7 +74,7 @@
 		* @access public
 		*/
 		function post($path, $postData = array()) {
-			$url = $this->_buildUrl($path);
+			$url = $this->_constructUrl($path);
 			$this->_postData = $postData;
 			return $this->_request($url, "post");
 		}
@@ -87,7 +87,7 @@
 		* @access public
 		*/
 		function put($path, $postData = array()) {
-			$url = $this->_buildURL($path);
+			$url = $this->_constructUrl($path);
 			$this->_postData = $postData;
 			return $this->_request($url, "put");
 		}
@@ -100,7 +100,7 @@
 		* @access public
 		*/
 		function delete($path, $params = array()) {
-			$url = $this->_buildUrl($path, $params);
+			$url = $this->_constructUrl($path, $params);
 			return $this->_request($url, "delete");
 		}
 		
@@ -131,7 +131,7 @@
 			
 			curl_close($ch);
 			
-			if($this->_validResponseCode($info['http_code'])) {
+			if($this->_validHttpResponseCode($info['http_code'])) {
 				return $data;
 			} else {
 				throw new Myemmapi_Invalid_Response_Exception(null, 0, $data, $info['http_code']);
@@ -145,7 +145,7 @@
 		* @return string $url
 		* @access private
 		*/
-		protected function _buildUrl($path, $params = array()) {
+		protected function _constructUrl($path, $params = array()) {
 			$url = $this->base_url . $this->_account_id;
 			$url .= $path;
 			$url .= (count($params)) ? '?' . http_build_query($params) : '';
@@ -159,7 +159,7 @@
 		* @return boolean
 		* @access private
 		*/
-		protected function _validResponseCode($code) {
+		protected function _validHttpResponseCode($code) {
 			return (bool)preg_match('/^20[0-9]{1}/', $code);
 		}
 	}

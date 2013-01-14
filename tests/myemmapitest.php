@@ -13,28 +13,28 @@
 		}
 		
 		public function testResponseCodeSuccess() {
-			self::assertTrue($this->my->validResponseCode(200));
+			self::assertTrue($this->my->validHttpResponseCode(200));
 		}
 		
 		public function testResponseCodeServerError() {
-			self::assertFalse($this->my->validResponseCode(500));
+			self::assertFalse($this->my->validHttpResponseCode(500));
 		}
 		
 		public function testResponseCodeClientError() {
-			self::assertFalse($this->my->validResponseCode(400));
+			self::assertFalse($this->my->validHttpResponseCode(400));
 		}
 		
 		public function testBuildUrl() {
 			self::assertEquals(
 				'https://api.e2ma.net/1718788/groups',
-				$this->my->buildUrl('/groups')
+				$this->my->constructUrl('/groups')
 			);
 		}
 		
 		public function testBuildUrlWithQueryParams() {
 			self::assertEquals(
 				'https://api.e2ma.net/1718788/groups?group_types=g',
-				$this->my->buildUrl('/groups', array('group_types' => 'g'))
+				$this->my->constructUrl('/groups', array('group_types' => 'g'))
 			);
 		}
 		
