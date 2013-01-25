@@ -5,7 +5,7 @@
 		protected $my;
 		
 		public function setUp() {
-			$this->my = new Myemmapi_Test_Helper('1718788', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
+			$this->my = new Emmapi_Test_Helper('1718788', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
 		}
 		
 		public function teardown() {
@@ -40,16 +40,16 @@
 		
 		public function testMissingAccountId() {
 			$this->setExpectedException('Myemmapi_Missing_Account_Id');
-			$api = new Myemmapi('', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
+			$api = new Emmapi('', 'f8d4b115292e8aa25356', '615ea1e36e9470c7746d');
 		}
 		
 		public function testMissingPublicKey() {
 			$this->setExpectedException('Myemmapi_Missing_Auth_For_Request');
-			$api = new Myemmapi('1718788', '', '615ea1e36e9470c7746d');
+			$api = new Emmapi('1718788', '', '615ea1e36e9470c7746d');
 		}
 		
 		public function testMissingPrivateKey() {
 			$this->setExpectedException('Myemmapi_Missing_Auth_For_Request');
-			$api = new Myemmapi('1718788', 'f8d4b115292e8aa25356', '');
+			$api = new Emmapi('1718788', 'f8d4b115292e8aa25356', '');
 		}
 	}

@@ -8,7 +8,7 @@ Wrapper includes methods to help with performing HTTP requests to MyEmma's publi
 ## Instantiate Myemma API Class
 ``` php
 <?php
-$em = new Myemmapi("xxx", "xxx", "xxx");
+$em = new Emmapi("xxx", "xxx", "xxx");
 ```
 
 ## GET

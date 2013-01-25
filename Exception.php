@@ -9,7 +9,7 @@
 	 * @license   http://www.opensource.org/licenses/mit-license.php MIT
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
-	class Myemmapi_Missing_Account_Id extends Exception {
+	class Emmapi_Missing_Account_Id extends Exception {
 		protected $message = "All requests must include your Account ID";
 	}
 	
@@ -22,7 +22,7 @@
 	 * @license   http://www.opensource.org/licenses/mit-license.php MIT
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
-	class Myemmapi_Missing_Auth_For_Request extends Exception {
+	class Emmapi_Missing_Auth_For_Request extends Exception {
 		protected $message = "All requests must include both your Public API Key and your Private API Key";
 	}
 
@@ -36,7 +36,7 @@
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
 
-	class Myemmapi_Invalid_Response_Exception extends Exception {
+	class Emmapi_Invalid_Response_Exception extends Exception {
 		/**
 		* Default Message
 		* @access protected
