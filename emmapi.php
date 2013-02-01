@@ -20,15 +20,15 @@
 		/**
 		* Cache the user account id for API usage
 		*/
-		private $_account_id;
+		protected $_account_id;
 		/**
 		* Cache the user public key for API usage
 		*/
-		private $_pub_key;
+		protected $_pub_key;
 		/**
 		* Cache the user private key for API usage
 		*/
-		private $_priv_key;
+		protected $_priv_key;
 		/**
 		* Cache optional postdata for HTTP request
 		*/
@@ -37,6 +37,8 @@
 		* Cache optional query params for HTTP request
 		*/
 		public $_params = array();
+		
+		protected $_debug = false;
 		
 		/**
 		* Connect to the Emma API
@@ -55,7 +57,7 @@
 			$this->_account_id = $account_id;
 			$this->_pub_key = $pub_api_key;
 			$this->_priv_key = $pri_api_key;
-			$this->debug = $debug;
+			$this->_debug = $debug;
 		}
 		
 		/** 
@@ -131,7 +133,7 @@
 		* @access public
 		* @return The member_id of the new or updated member, whether the member was added or an existing member was updated, and the status of the member. The status will be reported as ‘a’ (active), ‘e’ (error), or ‘o’ (optout).
 		*/
-		function membersAdd($member_data = array()) {
+		function membersAddSingle($member_data = array()) {
 			return $this->post("/members/add", $member_data);
 		}
 		
@@ -205,7 +207,7 @@
 		* @access public
 		* @return An array of references to the affected groups.
 		*/
-		function membersRemoveFromGroups($id, $params = array()) {
+		function membersRemoveSingleFromGroups($id, $params = array()) {
 			return $this->get("/members/{$id}/groups/remove", $params);
 		}
 		
@@ -216,8 +218,8 @@
 		* @return true
 		*/
 		function membersRemoveAll($members_status_id = "a") {
-			$this->_params["member_status_id"] = $member_status_id;
-			return $this->delete("/members");
+			$params = array('member_status_id' => $members_status_id);
+			return $this->delete("/members", $params);
 		}
 		
 		/**
@@ -246,8 +248,8 @@
 		* @access public
 		* @return Message history details for the specified member.
 		*/
-		function membersMailingHistory($id) {
-			return $this->get("/members/{$id}/mailings");
+		function membersMailingHistory($id, $params = array()) {
+			return $this->get("/members/{$id}/mailings", $params);
 		}
 		
 		/**
@@ -1021,7 +1023,7 @@
 			$data = curl_exec($ch);
 			$info = curl_getinfo($ch);
 			
-			if($this->debug) {
+			if($this->_debug) {
 				print_r($data . "\n");
 				print_r($info);
 			}
