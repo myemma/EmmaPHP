@@ -349,7 +349,7 @@
 		* @access public
 		* @return 	A reference to the new field.
 		*/
-		function fieldsAdd($params = array()) {
+		function fieldsAddSingle($params = array()) {
 			return $this->post("/fields", $params);
 		}
 		
@@ -359,7 +359,7 @@
 		* @access public
 		* @return 	True if the field is deleted, False otherwise.
 		*/
-		function fieldsRemove($id) {
+		function fieldsRemoveSingle($id) {
 			return $this->delete("/fields/{$id}");
 		}
 		
@@ -690,7 +690,7 @@
 		* @access public
 		* @return 	A single object with the following fields: * name – name of mailing * sent – messages sent * delivered – messages delivered * bounced – messages that failed delivery due to a hard or soft bounce * opened – messages opened * clicked_unique – link clicks, unique on message * clicked – total link clicks, including duplicates * forwarded – times the mailing was forwarded * opted_out – people who opted out based on this mailing * signed_up – people who signed up based on this mailing * shared – people who shared this mailing * share_clicked – number of clicks shares of this mailing received * webview_shared – number of times the customer has shared * webview_share_clicked – number of clicks customer-shares of this mailing received
 		*/
-		function responseSingleSummary($maling_id) {
+		function responseSingleSummary($mailing_id) {
 			return $this->get("/response/{$mailing_id}");
 		}
 		
@@ -759,7 +759,7 @@
 		* @access public
 		* @return 	The ID of the new search
 		*/
-		function searchesCreate($params = array()) {
+		function searchesCreateSingle($params = array()) {
 			return $this->post("/searches", $params);
 		}
 		
@@ -893,7 +893,7 @@
 		* @access public
 		* @return  	A list of event types and descriptions
 		*/
-		function webhooksEvents($params = array()) {
+		function webhooksGetEvents($params = array()) {
 			return $this->get("/webhooks/events", $params);
 		}
 		
