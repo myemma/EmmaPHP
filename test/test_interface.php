@@ -2,7 +2,7 @@
 
 	require_once '../emmapi.php';
 
-	class Emmapi_Test_Interface extends PHPUnit_Framework_TestCase {
+	class TestInterface extends PHPUnit_Framework_TestCase {
 		protected $account_id;
 		protected $public_key;
 		protected $private_key;
