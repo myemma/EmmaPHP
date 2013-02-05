@@ -15,46 +15,59 @@ $em = new Emmapi('account_id', 'public_key', 'private_key', debug_true_or_false)
 ```php
 // Returns an array of all members
 $req = $em->myMembers();
-print_r($req);
+echo json_decode($req);
 ```
 
 ## Pagination
 ```php
 // Returns a count of all members
 $req = $em->myMembers(array('count' => true));
-print_r($req);
+echo json_decode($req);
 ```
 
 ```php
 // Returns an array of members with specific offset
 $req = $em->myMembers(array('start' => 5, 'end' => 75));
-print_r($req);
+echo json_decode($req);
 ```
 
 ## POST Request
 ```php
 // Returns The member_id of the new or updated member, whether the member was added or an existing member was updated, and the status of the member. The status will be reported as ‘a’ (active), ‘e’ (error), or ‘o’ (optout).
-$member = array();
-$member['email'] = 'testing123@gmail.com';
-$member['fields'] = array('first_name' => 'bob', 'last_name' => 'saget');
-$req = $em->membersAddSingle($member);
-print_r($req);
+try {
+	$member = array();
+	$member['email'] = 'testing123@gmail.com';
+	$member['fields'] = array('first_name' => 'bob', 'last_name' => 'saget');
+	$req = $em->membersAddSingle($member);
+	echo json_decode($req);
+} catch(Emmapi_Invalid_Response_Exception $e) {
+	exit($e->getMessage());
+}
+
 ```
 
 ## PUT Request
 ```php
 // Returns True if the member was updated successfully
-$member = array();
-$member['email'] = 'testing345@gmail.com';
-$member['fields'] = array('first_name' => 'Betty', 'last_name' => 'Sue');
-$member['status_to'] = 'a';
-$req = $em->membersUpdateSingle(111, $member);
-print_r($req);
+try {
+	$member = array();
+	$member['email'] = 'testing345@gmail.com';
+	$member['fields'] = array('first_name' => 'Betty', 'last_name' => 'Sue');
+	$member['status_to'] = 'a';
+	$req = $em->membersUpdateSingle(111, $member);
+	echo json_decode($req);
+} catch(Emmapi_Invalid_Response_Exception $e) {
+	exit($e->getMessage());
+}
 ```
 
 ## DELETE Request
 ```php
 // Returns True if the member is deleted.
-$req = $em->membersRemoveSingle(111);
-print_r($req);
+try {
+	$req = $em->membersRemoveSingle(111);
+	echo json_decode($req);
+} catch(Emmapi_Invalid_Response_Exception $e) {
+	exit($e->getMessage());
+}
 ```
