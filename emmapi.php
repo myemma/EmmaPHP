@@ -165,7 +165,7 @@
 		* @access public
 		* @return True if the member was updated successfully
 		*/
-		function membersChangeSingleStatus($id, $params = array()) {
+		function membersUpdateSingle($id, $params = array()) {
 			return $this->put("/members/{$id}", $params);
 		}
 		
