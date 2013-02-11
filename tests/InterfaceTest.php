@@ -7,9 +7,9 @@
 		protected $debug;
 		
 		public function setup() {
-			$this->account_id = '1718788';
-			$this->public_key = 'f8d4b115292e8aa25356';
-			$this->private_key = '615ea1e36e9470c7746d';
+			$this->account_id = ACCOUNT_ID;
+			$this->public_key = API_PUBLIC_KEY;
+			$this->private_key = API_PRIVATE_KEY;
 			$this->debug = true;
 		}
 		
