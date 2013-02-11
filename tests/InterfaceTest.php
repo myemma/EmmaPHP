@@ -21,17 +21,17 @@
 		}
 		
 		public function testMissingAccountId() {
-			$this->setExpectedException('Emmapi_Missing_Account_Id');
-			$this->em = new Emmapi('', $this->public_key, $this->private_key);
+			$this->setExpectedException('Emma_Missing_Account_Id');
+			$this->em = new Emma('', $this->public_key, $this->private_key);
 		}
 		
 		public function testMissingPublicKey() {
-			$this->setExpectedException('Emmapi_Missing_Auth_For_Request');
-			$this->em = new Emmapi($this->account_id, '', $this->private_key);
+			$this->setExpectedException('Emma_Missing_Auth_For_Request');
+			$this->em = new Emma($this->account_id, '', $this->private_key);
 		}
 		
 		public function testMissingPrivateKey() {
-			$this->setExpectedException('Emmapi_Missing_Auth_For_Request');
-			$this->em = new Emmapi($this->account_id, $this->public_key, '');
+			$this->setExpectedException('Emma_Missing_Auth_For_Request');
+			$this->em = new Emma($this->account_id, $this->public_key, '');
 		}
 	}

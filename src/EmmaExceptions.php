@@ -1,7 +1,7 @@
 <?php
 
 	/**
-	 * MyEmma API Wrapper Exception for if there is a missing Account ID
+	 * Emma API Wrapper Exception for if there is a missing Account ID
 	 *
 	 * @category  Services
 	 * @author    Dennis Monsewicz <dennismonsewicz@gmail.com>
@@ -9,12 +9,12 @@
 	 * @license   http://www.opensource.org/licenses/mit-license.php MIT
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
-	class Emmapi_Missing_Account_Id extends Exception {
+	class Emma_Missing_Account_Id extends Exception {
 		protected $message = "All requests must include your Account ID";
 	}
 	
 	/**
-	 * MyEmma API Wrapper Exception for if there is a missing public key or private key
+	 * Emma API Wrapper Exception for if there is a missing public key or private key
 	 *
 	 * @category  Services
 	 * @author    Dennis Monsewicz <dennismonsewicz@gmail.com>
@@ -22,12 +22,12 @@
 	 * @license   http://www.opensource.org/licenses/mit-license.php MIT
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
-	class Emmapi_Missing_Auth_For_Request extends Exception {
+	class Emma_Missing_Auth_For_Request extends Exception {
 		protected $message = "All requests must include both your Public API Key and your Private API Key";
 	}
 
 	/**
-	 * MyEmma API Wrapper Custom Exception
+	 * Emma API Wrapper Custom Exception
 	 *
 	 * @category  Services
 	 * @author    Dennis Monsewicz <dennismonsewicz@gmail.com>
@@ -36,7 +36,7 @@
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
 
-	class Emmapi_Invalid_Response_Exception extends Exception {
+	class Emma_Invalid_Response_Exception extends Exception {
 		/**
 		* Default Message
 		* @access protected

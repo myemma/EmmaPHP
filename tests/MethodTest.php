@@ -12,7 +12,7 @@
 			$this->public_key = API_PUBLIC_KEY;
 			$this->private_key = API_PRIVATE_KEY;
 			$this->debug = false;
-			$this->em = new Emmapi($this->account_id, $this->public_key, $this->private_key, $this->debug);
+			$this->em = new Emma($this->account_id, $this->public_key, $this->private_key, $this->debug);
 		}
 		
 		public function testmyMembers() {
@@ -21,22 +21,22 @@
 		}
 		
 		public function testmembersListById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListById(111));
 		}
 		
 		public function testmembersListByEmail() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListByEmail('test123@gmail.com'));
 		}
 		
 		public function testmembersListOptout() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListByEmail(111));
 		}
 		
 		public function testmembersOptout() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersOptout('test123@gmail.com'));
 		}
 		
@@ -73,27 +73,27 @@
 		}
 		
 		public function testmembersUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersUpdateSingle(111));
 		}
 		
 		public function testmembersRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersRemoveSingle(111));
 		}
 		
 		public function testmembersListSingleGroups() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListSingleGroups(111));
 		}
 		
 		public function testmembersGroupsAdd() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListSingleGroups(111, array('group_ids' => array(1,2))));
 		}
 		
 		public function testmembersRemoveSingleFromGroups() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersListSingleGroups(111, array('group_ids' => array(1223))));
 		}
 		
@@ -103,7 +103,7 @@
 		}
 		
 		public function testmembersRemoveFromAllGroups() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersRemoveFromAllGroups(111));
 		}
 		
@@ -128,12 +128,12 @@
 		}
 		
 		public function testmembersRemoveImport() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersRemoveImport(111));
 		}
 		
 		public function testmembersCopyToGroup() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->membersCopyToGroup(111, array('member_status_id' => array('a'))));
 		}
 		
@@ -148,7 +148,7 @@
 		}
 		
 		public function testfieldsGetById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->fieldsGetById(111));
 		}
 		
@@ -163,7 +163,7 @@
 		}
 		
 		public function testfieldsRemove() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->fieldsRemoveSingle(111));
 		}
 		
@@ -173,7 +173,7 @@
 		}
 		
 		public function testfieldsUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$field = array();
 			$field['display_name'] = "Your First Name";
 			$req = json_decode($this->em->fieldsUpdateSingle(111, $field));
@@ -193,35 +193,35 @@
 		}
 		
 		public function testgroupsGetById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->groupsGetById(111));
 		}
 		
 		public function testgroupsUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$g = array();
 			$g['group_name'] = 'A new name goes here';
 			$req = json_decode($this->em->groupsUpdateSingle(111, $g));
 		}
 		
 		public function testgroupsRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->groupsRemoveSingle(111));
 		}
 		
 		public function testgroupsGetMembers() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->groupsGetMembers(111));
 		}
 		
 		public function testgroupsAddMembersToGroup() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$ids[] = 1;
 			$req = json_decode($this->em->groupsAddMembersToGroup(111, $ids));
 		}
 		
 		public function testgroupsRemoveMembers() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$ids[] = 1;
 			$ids[] = 2;
 			$req = json_decode($this->em->groupsRemoveMembers(111, $ids));
@@ -243,57 +243,57 @@
 		}
 		
 		public function testmailingsGetById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsGetById(111));
 		}
 		
 		public function testmailingsPersonalizedMemberMailing() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsPersonalizedMemberMailing(111, 12));
 		}
 		
 		public function testmailingsMembersById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsMembersById(111));
 		}
 		
 		public function testmailingsGetGroups() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsGetGroups(111));
 		}
 		
 		public function testmailingsSearches() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsSearches(111));
 		}
 		
 		public function testmailingsUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsUpdateSingle(111, array('status' => 'canceled')));
 		}
 		
 		public function testmailingsRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsRemoveSingle(111));
 		}
 		
 		public function testmailingsCanceledQueued() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsCanceledQueued(111));
 		}
 		
 		public function testmailingsForward() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsForward(111, 102, array('recipient_emails' => array('test123@gmail.com'))));
 		}
 		
 		public function testmailingsSendExisting() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsSendExisting(111, array('recipient_emails' => array('test123@gmail.com'))));
 		}
 		
 		public function testmailingsHeadsup() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsHeadsup(111));
 		}
 		
@@ -303,7 +303,7 @@
 		}
 		
 		public function testmailingsDeclareWinnerOfSplitTest() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->mailingsDeclareWinnerOfSplitTest(111, 102));
 		}
 		
@@ -313,7 +313,7 @@
 		}
 		
 		public function testresponseSingleSummary() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->responseSingleSummary(111));
 		}
 		
@@ -332,19 +332,19 @@
 			$responses[] = 'customer_share_clicks';
 			
 			foreach($responses as $resp) {
-				$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+				$this->setExpectedException('Emma_Invalid_Response_Exception');
 				$req = json_decode($this->em->responseMailingInformation(111, $resp));
 			}
 			
 		}
 		
 		public function testresponseCustomerShareInformation() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->responseSingleSummary(111));
 		}
 		
 		public function testresponseSharesOverview() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->responseSharesOverview(111));
 		}
 		
@@ -354,7 +354,7 @@
 		}
 		
 		public function testsearchesGetById() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->searchesGetById(121));
 		}
 		
@@ -365,18 +365,18 @@
 		}
 		
 		public function testsearchesUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$search = array('name' => 'new search 2', 'criteria' => array('or', array('group', 'eq', 'Monthly Newsletter')));
 			$req = json_decode($this->em->searchesUpdateSingle(111, $search));
 		}
 		
 		public function testsearchesRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->searchesRemoveSingle(121));
 		}
 		
 		public function testsearchesMembers() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->searchesMembers(121));
 		}
 		
@@ -386,27 +386,27 @@
 		}
 		
 		public function testtriggersCreate() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->triggersCreate(array('parent_mailing_id' => 111, 'name' => 'test', 'event_type' => 'c', 'object_ids' => array(101, 102))));
 		}
 		
 		public function testtriggersGetSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->triggersGetSingle(121));
 		}
 		
 		public function testtriggersUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->triggersUpdateSingle(121, array('name' => 'Another testing is being done')));
 		}
 		
 		public function testtriggersRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->triggersUpdateSingle(121));
 		}
 		
 		public function testtriggersMailings() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->triggersMailings(121));
 		}
 		
@@ -416,7 +416,7 @@
 		}
 		
 		public function testwebhooksGetSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->webhooksGetSingle(121));
 		}
 		
@@ -431,12 +431,12 @@
 		}
 		
 		public function testwebhooksRemoveSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->webhooksRemoveSingle(111));
 		}
 		
 		public function testwebhooksUpdateSingle() {
-			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
+			$this->setExpectedException('Emma_Invalid_Response_Exception');
 			$req = json_decode($this->em->webhooksUpdateSingle(111, array('url' => 'http://www.google.com', 'event' => 'mailing_finish')));
 		}
 		

@@ -1,6 +1,6 @@
 <?php
 
-	require_once 'Exception.php';
+	require_once 'EmmaExceptions.php';
 	
 	/**
 	 * Emma API Wrapper
@@ -12,7 +12,7 @@
 	 * @license   http://www.opensource.org/licenses/mit-license.php MIT
 	 * @link      https://github.com/myemma/emma-wrapper-php
 	 */
-	class Emmapi {
+	class Emma {
 		/**
 		* Cache the API base url
 		*/
@@ -49,10 +49,10 @@
 		*/
 		function __construct($account_id, $pub_api_key, $pri_api_key, $debug = false) {
 			if(empty($account_id))
-				throw new Emmapi_Missing_Account_Id();
+				throw new Emma_Missing_Account_Id();
 			
 			if(empty($pub_api_key) || empty($pri_api_key))
-				throw new Emmapi_Missing_Auth_For_Request();
+				throw new Emma_Missing_Auth_For_Request();
 			
 			$this->_account_id = $account_id;
 			$this->_pub_key = $pub_api_key;
@@ -1033,7 +1033,7 @@
 			if($this->_validHttpResponseCode($info['http_code'])) {
 				return $data;
 			} else {
-				throw new Emmapi_Invalid_Response_Exception(null, 0, $data, $info['http_code']);
+				throw new Emma_Invalid_Response_Exception(null, 0, $data, $info['http_code']);
 			}
 		}
 		
