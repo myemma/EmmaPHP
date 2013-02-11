@@ -1,14 +1,18 @@
-##emma-wrapper-php
+##Emma API Wrapper (PHP)
 
 A PHP wrapper for Emma's API.
+
+## Running the tests [![Build Status](https://travis-ci.org/myemma/emma-wrapper-php.png)](https://travis-ci.org/myemma/emma-wrapper-php)
+
+`phpunit --bootstrap tests/Bootstrap.php tests`
 
 ## Examples
 Wrapper includes methods to help with performing HTTP requests to Emma's public API
 
 ## Instantiation
 ```php
-require 'emmapi.php';
-$em = new Emmapi('account_id', 'public_key', 'private_key', debug_true_or_false);
+require 'src/Emma.php';
+$em = new Emma('account_id', 'public_key', 'private_key', debug_true_or_false);
 ```
 
 ## GET Request
@@ -40,7 +44,7 @@ try {
 	$member['fields'] = array('first_name' => 'bob', 'last_name' => 'saget');
 	$req = $em->membersAddSingle($member);
 	echo json_decode($req);
-} catch(Emmapi_Invalid_Response_Exception $e) {
+} catch(Emma_Invalid_Response_Exception $e) {
 	exit($e->getMessage());
 }
 
@@ -56,7 +60,7 @@ try {
 	$member['status_to'] = 'a';
 	$req = $em->membersUpdateSingle(111, $member);
 	echo json_decode($req);
-} catch(Emmapi_Invalid_Response_Exception $e) {
+} catch(Emma_Invalid_Response_Exception $e) {
 	exit($e->getMessage());
 }
 ```
@@ -67,7 +71,7 @@ try {
 try {
 	$req = $em->membersRemoveSingle(111);
 	echo json_decode($req);
-} catch(Emmapi_Invalid_Response_Exception $e) {
+} catch(Emma_Invalid_Response_Exception $e) {
 	exit($e->getMessage());
 }
 ```
