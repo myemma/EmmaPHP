@@ -1,7 +1,5 @@
 <?php
 
-	require_once '../emmapi.php';
-
 	class TestMethods extends PHPUnit_Framework_TestCase {
 		protected $account_id;
 		protected $public_key;

@@ -5,6 +5,10 @@ A PHP wrapper for Emma's API.
 ## Examples
 Wrapper includes methods to help with performing HTTP requests to Emma's public API
 
+## Running the tests
+
+`phpunit --bootstrap tests/Bootstrap.php tests`
+
 ## Instantiation
 ```php
 require 'emmapi.php';
