@@ -76,7 +76,7 @@
 		
 		public function testmembersUpdateSingle() {
 			$this->setExpectedException('Emmapi_Invalid_Response_Exception');
-			$req = json_decode($this->em->membersChangeSingleStatus(111));
+			$req = json_decode($this->em->membersUpdateSingle(111));
 		}
 		
 		public function testmembersRemoveSingle() {
