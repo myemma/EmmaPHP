@@ -1,13 +1,13 @@
-##emma-wrapper-php
+##Emma API Wrapper (PHP)
 
 A PHP wrapper for Emma's API.
 
-## Examples
-Wrapper includes methods to help with performing HTTP requests to Emma's public API
-
-## Running the tests
+## Running the tests [![Build Status](https://travis-ci.org/myemma/emma-wrapper-php.png)](https://travis-ci.org/myemma/emma-wrapper-php)
 
 `phpunit --bootstrap tests/Bootstrap.php tests`
+
+## Examples
+Wrapper includes methods to help with performing HTTP requests to Emma's public API
 
 ## Instantiation
 ```php
