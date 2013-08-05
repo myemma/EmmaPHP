@@ -138,6 +138,16 @@
 		}
 		
 		/**
+		* Takes the necessary actions to signup a member and enlist them in the provided group ids. You can send the same member multiple times and pass in new group ids to signup.
+		* @param array $member_data	Array of options
+		* @access public
+		* @return the member_id of the member, and their status. The status will be reported as 'a' (active), 'e' (error), or 'o' (optout).
+		*/
+		function membersSignup($member_data = array()) {
+			return $this->post("/members/signup", $member_data);
+		}
+		
+		/**
 		* Delete an array of members. The members will be marked as deleted and cannot be retrieved.
 		* @param array $params		Array of options
 		* @access public
