@@ -60,6 +60,16 @@
 			$this->assertSelectRegExp('member_id', '/member_id/', false, $req);
 		}
 		
+		public function testmembersSignup() {
+			$rand = $this->_generateRandomString();
+			$member = array();
+			$member['email'] = 'dennismonsewicz+' . $rand .'@gmail.com';
+			$member['fields'] = array('first_name' => 'Hola');
+			$member['group_ids'] = array(1223);
+			$req = json_decode($this->em->membersSignup($member));
+			$this->assertSelectRegExp('member_id', '/member_id/', false, $req);
+		}
+		
 		public function testmembersRemove() {
 			$members = array('member_ids' => array(101, 102));
 			$req = json_decode($this->em->membersRemove($members));
