@@ -218,7 +218,7 @@
 		* @return An array of references to the affected groups.
 		*/
 		function membersRemoveSingleFromGroups($id, $params = array()) {
-			return $this->get("/members/{$id}/groups/remove", $params);
+			return $this->put("/members/{$id}/groups/remove", $params);
 		}
 		
 		/**
