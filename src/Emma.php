@@ -957,7 +957,11 @@
 		protected function get($path, $params = array()) {
 			$this->_params = array_merge($params, $this->_params);
 			$url = $this->_constructUrl($path);
-			return $this->_request($url);
+			$req = $this->_request($url);
+			foreach($params as $key => $value) {
+				unset($this->_params[$key]);
+			}
+			return $req;
 		}
 		
 		/**
