@@ -597,7 +597,7 @@
 		* @return 	Returns the mailing’s new status
 		*/
 		function mailingsUpdateSingle($id, $params = array()) {
-			return $this->put("/malings/{$id}", $params);
+			return $this->put("/mailings/{$id}", $params);
 		}
 		
 		/**
