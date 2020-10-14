@@ -1,7 +1,7 @@
 <?php
 
 	require_once 'EmmaExceptions.php';
-	
+
 	/**
 	 * Emma API Wrapper
 	 *
@@ -37,9 +37,9 @@
 		* Cache optional query params for HTTP request
 		*/
 		public $_params = array();
-		
+
 		protected $_debug = false;
-		
+
 		/**
 		* Connect to the Emma API
 		* @param string $account_id		Your Emma Account Id
@@ -50,21 +50,21 @@
 		function __construct($account_id, $pub_api_key, $pri_api_key, $debug = false) {
 			if(empty($account_id))
 				throw new Emma_Missing_Account_Id();
-			
+
 			if(empty($pub_api_key) || empty($pri_api_key))
 				throw new Emma_Missing_Auth_For_Request();
-			
+
 			$this->_account_id = $account_id;
 			$this->_pub_key = $pub_api_key;
 			$this->_priv_key = $pri_api_key;
 			$this->_debug = $debug;
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Members related endpoint(s)
 		* @see http://api.myemma.com/api/external/members.html
 		*/
-		
+
 		/**
 		* Get a basic listing of all members in an account.
 		* @param array $params		Array Additional HTTP GET params
@@ -74,7 +74,7 @@
 		function myMembers($params = array()) {
 			return $this->get('/members', $params);
 		}
-		
+
 		/**
 		* Get detailed information on a particular member, including all custom fields.
 		* @param int $id		Member Id
@@ -85,7 +85,7 @@
 		function membersListById($id, $params = array()) {
 			return $this->get("/members/{$id}", $params);
 		}
-		
+
 		/**
 		* Get detailed information on a particular member, including all custom fields, by email address instead of ID.
 		* @param string $email		Member Email
@@ -96,7 +96,7 @@
 		function membersListByEmail($email, $params = array()) {
 			return $this->get("/members/email/{$email}", $params);
 		}
-		
+
 		/**
 		* If a member has been opted out, returns the details of their optout, specifically date and mailing_id.
 		* @param int $id		Member ID
@@ -106,7 +106,7 @@
 		function membersListOptout($id) {
 			return $this->get("/members/{$id}/optout");
 		}
-		
+
 		/**
 		* Update a member’s status to optout keyed on email address instead of an ID.
 		* @param string $email		Member Email
@@ -116,7 +116,7 @@
 		function membersOptout($email) {
 			return $this->put("/members/email/optout/{$email}");
 		}
-		
+
 		/**
 		* Add new members or update existing members in bulk. If you are doing actions for a single member please see the membersAdd() function
 		* @param array $params		Array of options
@@ -126,7 +126,7 @@
 		function membersBatchAdd($params = array()) {
 			return $this->post('/members', $params);
 		}
-		
+
 		/**
 		* Adds or updates a single audience member. If you are performing actions on bulk members please use the membersBatchAdd() function
 		* @param array $member_data		Array of options
@@ -136,7 +136,7 @@
 		function membersAddSingle($member_data = array()) {
 			return $this->post("/members/add", $member_data);
 		}
-		
+
 		/**
 		* Takes the necessary actions to signup a member and enlist them in the provided group ids. You can send the same member multiple times and pass in new group ids to signup.
 		* @param array $member_data	Array of options
@@ -146,7 +146,7 @@
 		function membersSignup($member_data = array()) {
 			return $this->post("/members/signup", $member_data);
 		}
-		
+
 		/**
 		* Delete an array of members. The members will be marked as deleted and cannot be retrieved.
 		* @param array $params		Array of options
@@ -156,7 +156,7 @@
 		function membersRemove($params = array()) {
 			return $this->put("/members/delete", $params);
 		}
-		
+
 		/**
 		* Change the status for an array of members. The members will have their member_status_id updated.
 		* @param array $params		Array of options
@@ -166,7 +166,7 @@
 		function membersChangeStatus($params = array()) {
 			return $this->put("/members/status", $params);
 		}
-		
+
 		/**
 		* Update a single member’s information.
 		* Update the information for an existing member. Note that this method allows the email address to be updated (which cannot be done with a POST, since in that case the email address is used to identify the member).
@@ -178,7 +178,7 @@
 		function membersUpdateSingle($id, $params = array()) {
 			return $this->put("/members/{$id}", $params);
 		}
-		
+
 		/**
 		* Delete the specified member. The member, along with any associated response and history information, will be completely removed from the database.
 		* @param int $id	Member ID
@@ -188,7 +188,7 @@
 		function membersRemoveSingle($id) {
 			return $this->delete("/members/{$id}");
 		}
-		
+
 		/**
 		* Get the groups to which a member belongs.
 		* @param int $id	Member ID
@@ -198,7 +198,7 @@
 		function membersListSingleGroups($id) {
 			return $this->get("/members/{$id}/groups");
 		}
-		
+
 		/**
 		* Add a single member to one or more groups.
 		* @param int $id		Member ID
@@ -209,7 +209,7 @@
 		function membersGroupsAdd($id, $params = array()) {
 			return $this->put("/members/{$id}/groups", $params);
 		}
-		
+
 		/**
 		* Remove a single member from one or more groups.
 		* @param int $id		Member ID
@@ -220,7 +220,7 @@
 		function membersRemoveSingleFromGroups($id, $params = array()) {
 			return $this->put("/members/{$id}/groups/remove", $params);
 		}
-		
+
 		/**
 		* Delete all members.
 		* @param string $member_status_id	Status to set all affected members
@@ -231,7 +231,7 @@
 			$params = array('member_status_id' => $members_status_id);
 			return $this->delete("/members", $params);
 		}
-		
+
 		/**
 		* Remove the specified member from all groups.
 		* @param int $member_id		Member ID
@@ -241,7 +241,7 @@
 		function membersRemoveFromAllGroups($member_id) {
 			return $this->delete("/members/{$member_id}/groups");
 		}
-		
+
 		/**
 		* Remove multiple members from groups.
 		* @param array $params		Array of options
@@ -251,7 +251,7 @@
 		function membersRemoveMultipleFromGroups($params = array()){
 			return $this->put("/members/groups/remove", $params);
 		}
-		
+
 		/**
 		* Get the entire mailing history for a member.
 		* @param int $id	Member ID
@@ -261,7 +261,7 @@
 		function membersMailingHistory($id, $params = array()) {
 			return $this->get("/members/{$id}/mailings", $params);
 		}
-		
+
 		/**
 		* Get a list of members affected by this import.
 		* @param int $import_id		ID of import
@@ -271,7 +271,7 @@
 		function membersImported($import_id) {
 			return $this->get("/members/imports/{$import_id}/members");
 		}
-		
+
 		/**
 		* Get information and statistics about this import.
 		* @param int $import_id		ID of import
@@ -281,7 +281,7 @@
 		function membersImportStats($import_id) {
 			return $this->get("/members/imports/{$import_id}");
 		}
-		
+
 		/**
 		* Get information about all imports for this account.
 		* @param array $params		Array of options
@@ -291,7 +291,7 @@
 		function myImports($params = array()) {
 			return $this->get("/members/imports", $params);
 		}
-		
+
 		/**
 		* Update an import record to be marked as ‘deleted’.
 		* @access public
@@ -300,7 +300,7 @@
 		function membersRemoveImport() {
 			return $this->delete("/members/imports/delete");
 		}
-		
+
 		/**
 		* Copy all account members of one or more statuses into a group.
 		* @param int $group_id		ID of group
@@ -311,7 +311,7 @@
 		function membersCopyToGroup($group_id, $params = array()) {
 			return $this->put("/members/{$group_id}/copy", $params);
 		}
-		
+
 		/**
 		* Update the status for a group of members, based on their current status. Valid statuses id are (‘a’,’e’, ‘f’, ‘o’) active, error, forwarded, optout.
 		* @param string $status_from	Existing status
@@ -325,12 +325,12 @@
 			$data["group_id"] = $group_id;
 			return $this->put("/members/status/{$status_from}/to/{$status_to}", $data);
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Fields related endpoint(s)
 		* @see http://api.myemma.com/api/external/fields.html
 		*/
-		
+
 		/**
 		* Gets a list of this account’s defined fields.
 		* @param array $params		Array of options
@@ -340,7 +340,7 @@
 		function myFields($params = array()) {
 			return $this->get("/fields", $params);
 		}
-		
+
 		/**
 		* Gets the detailed information about a particular field.
 		* @param int $id			ID of Field
@@ -351,7 +351,7 @@
 		function fieldsGetById($id, $params = array()) {
 			return $this->get("/fields/{$id}", $params);
 		}
-		
+
 		/**
 		* Create a new field field.
 		* There must not already be a field with this name.
@@ -362,7 +362,7 @@
 		function fieldsAddSingle($params = array()) {
 			return $this->post("/fields", $params);
 		}
-		
+
 		/**
 		* Deletes a field.
 		* @param int $id	ID of Field
@@ -372,7 +372,7 @@
 		function fieldsRemoveSingle($id) {
 			return $this->delete("/fields/{$id}");
 		}
-		
+
 		/**
 		* Clear the member data for the specified field.
 		* @param int $id	ID of Field
@@ -382,7 +382,7 @@
 		function fieldsRemoveMemberDataForField($id) {
 			return $this->post("/fields/{$id}/clear");
 		}
-		
+
 		/**
 		* Updates an existing field.
 		* @param int $id			ID of Field
@@ -393,12 +393,12 @@
 		function fieldsUpdateSingle($id, $params = array()) {
 			return $this->put("/fields/{$id}", $params);
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Groups related endpoint(s)
 		* @see http://api.myemma.com/api/external/groups.html
 		*/
-		
+
 		/**
 		* Get a basic listing of all active member groups for a single account.
 		* @param array $params		Array of options
@@ -408,7 +408,7 @@
 		function myGroups($params = array()) {
 			return $this->get("/groups", $params);
 		}
-		
+
 		/**
 		* Create one or more new member groups.
 		* @param array $params		Array of options
@@ -418,7 +418,7 @@
 		function groupsAdd($params = array()) {
 			return $this->post("/groups", $params);
 		}
-		
+
 		/**
 		* Get the detailed information for a single member group.
 		* @param int $id	ID of group
@@ -428,7 +428,7 @@
 		function groupsGetById($id) {
 			return $this->get("/groups/{$id}");
 		}
-		
+
 		/**
 		* Update information for a single member group.
 		* @param int $id		ID of group
@@ -439,7 +439,7 @@
 		function groupsUpdateSingle($id, $params = array()) {
 			return $this->put("/groups/{$id}", $params);
 		}
-		
+
 		/**
 		* Delete a single member group.
 		* @param int $id		ID of group
@@ -449,7 +449,7 @@
 		function groupsRemoveSingle($id) {
 			return $this->delete("/groups/{$id}");
 		}
-		
+
 		/**
 		* Get the members in a single active member group.
 		* @param int $id		ID of group
@@ -460,7 +460,7 @@
 		function groupsGetMembers($id, $params = array()) {
 			return $this->get("/groups/{$id}/members", $params);
 		}
-		
+
 		/**
 		* Add a list of members to a single active member group.
 		* @param int $id		ID of group
@@ -471,7 +471,7 @@
 		function groupsAddMembersToGroup($id, $params = array()) {
 			return $this->put("/groups/{$id}/members", $params);
 		}
-		
+
 		/**
 		* Remove members from a single active member group.
 		* @param int $id		ID of group
@@ -482,7 +482,7 @@
 		function groupsRemoveMembers($id, $params = array()) {
 			return $this->put("/groups/{$id}/members/remove", $params);
 		}
-		
+
 		/**
 		* Remove all members from a single active member group.
 		* @param int $id		ID of group
@@ -493,7 +493,7 @@
 		function groupsRemoveAllMembers($id, $params = array()) {
 			return $this->delete("/groups/{$id}/members", $params);
 		}
-		
+
 		/**
 		* Remove all members from all active member groups as a background job. The member_status_id parameter must be set.
 		* @param int $id		ID of group
@@ -504,7 +504,7 @@
 		function groupsRemoveAllMembersAsBackgroundJob($id, $params = array()) {
 			return $this->delete("/groups/{$id}/members/remove", $params);
 		}
-		
+
 		/**
 		* Copy all the users of one group into another group.
 		* @param int $from_id	ID of existing group
@@ -516,12 +516,100 @@
 		function groupsCopyMembers($from_id, $to_id, $params = array()) {
 			return $this->put("/groups/{$from_id}/{$to_id}/members/copy", $params);
 		}
-		
-		/** 
+
+    		/**
+		* API Calls to the Subscriptions related endpoint(s)
+		* @see https://api.myemma.com/api/external/subscriptions.html
+		*/
+
+    		/**
+		* Get a list of all subscriptions in an account.
+		* @param array $params		Array of options
+		* @access public
+		* @return 	A list of subscriptions in an account along with related information, including member count and subscription ID.
+		*/
+		function mySubscriptions($params = array()) {
+			return $this->get("/subscriptions", $params);
+		}
+
+    /**
+		* Get detailed information for a specific subscription.
+		* @param int $id	ID of subscription
+		* @access public
+		* @return  Information about a subscription.
+		*/
+		function subscriptionsGetById($id) {
+			return $this->get("/subscriptions/{$id}");
+		}
+
+    		/**
+		* Get a list of member IDs for members subscribed to a specific subscription.
+		* @param int $id  ID of group
+		* @param array $params	Array of options
+		* @access public
+		* @return 	A list of member IDs.
+		*/
+		function subscriptionsGetMembers($id, $params = array()) {
+			return $this->get("/subscriptions/{$id}/members", $params);
+		}
+
+    		/**
+		* Get a list of member IDs for members who have opted out of a specific subscription.
+		* @param int $id		ID of group
+		* @param array $params	Array of options
+		* @access public
+		* @return 	A list of member IDs.
+		*/
+		function subscriptionsGetMembersOptouts($id, $params = array()) {
+			return $this->get("/subscriptions/{$id}/optouts", $params);
+		}
+
+    		/**
+		* Create a subscription.
+		* @param array $params		Array of options
+		* @access public
+		* @return 	Information about the created subscription, including the subscription ID.
+		*/
+		function subscriptionsAdd($params = array()) {
+			return $this->post("/subscriptions", $params);
+		}
+
+    		/**
+		* Bulk subscribe members to a subscription using either a list of member IDs or a single import ID.
+		* @param array $params		Array of options
+		* @access public
+		* @return True if successful.
+		*/
+		function subscriptionsBatchAdd($params = array()) {
+			return $this->post("/subscriptions/{$id}/members/bulk", $params);
+		}
+
+    		/**
+		* Edit a subscription's name or description.
+		* @param int $id		ID of group
+		* @param array $params	Array of options
+		* @access public
+		* @return  Information about the updated subscription.
+		*/
+		function subscriptionsUpdateSingle($id, $params = array()) {
+			return $this->put("/subscriptions/{$id}", $params);
+		}
+
+    		/**
+		* Delete a subscription.
+		* @param int $id		ID of group
+		* @access public
+		* @return  Information about the subscription, including the date and time it was deleted.
+		*/
+		function subscriptionsRemoveSingle($id) {
+			return $this->delete("/subscriptions/{$id}");
+		}
+
+		/**
 		* API Calls to the Mailings related endpoint(s)
 		* @see http://api.myemma.com/api/external/mailings.html
 		*/
-		
+
 		/**
 		* Get information about current mailings.
 		* @param array $params	Array of options
@@ -531,7 +619,7 @@
 		function myMailings($params = array()) {
 			return $this->get("/mailings", $params);
 		}
-		
+
 		/**
 		* Get detailed information for one mailing.
 		* @param int $id	ID of mailing
@@ -541,7 +629,7 @@
 		function mailingsGetById($id) {
 			return $this->get("/mailings/{$id}");
 		}
-		
+
 		/**
 		* Get the list of members to whom the given mailing was sent. This does not include groups or searches.
 		* @param int $id			ID of mailing
@@ -553,7 +641,7 @@
 		function mailingsPersonalizedMemberMailing($id, $member_id, $params = array()) {
 			return $this->get("/mailings/{$id}/messages/{$member_id}", $params);
 		}
-		
+
 		/**
 		* Gets the personalized message content as sent to a specific member as part of the specified mailing.
 		* @param int $id			ID of mailing
@@ -564,7 +652,7 @@
 		function mailingsMembersById($id, $params = array()) {
 			return $this->get("/mailings/{$id}/members", $params);
 		}
-		
+
 		/**
 		* Get the groups to which a particular mailing was sent.
 		* @param int $id			ID of mailing
@@ -575,7 +663,7 @@
 		function mailingsGetGroups($id, $params = array()) {
 			return $this->get("/mailings/{$id}/groups", $params);
 		}
-		
+
 		/**
 		* Get all searches associated with a sent mailing.
 		* @param int $id			ID of mailing
@@ -586,10 +674,10 @@
 		function mailingsSearches($id, $params = array()) {
 			return $this->get("/mailings/{$id}/searches", $params);
 		}
-		
+
 		/**
-		* Update status of a current mailing. 
-		* The status can be one of canceled, paused or ready. This method can be used to control the progress of a mailing by pausing, canceling or resuming it. 
+		* Update status of a current mailing.
+		* The status can be one of canceled, paused or ready. This method can be used to control the progress of a mailing by pausing, canceling or resuming it.
 		* Once a mailing is canceled it can’t be resumed, and will not show in the normal mailing_list output.
 		* @param int $id			ID of mailing
 		* @param array $params		Array of options
@@ -599,7 +687,7 @@
 		function mailingsUpdateSingle($id, $params = array()) {
 			return $this->put("/malings/{$id}", $params);
 		}
-		
+
 		/**
 		* Sets archived timestamp for a mailing so it is no longer included in mailing_list.
 		* @param int $id	ID of mailing
@@ -609,7 +697,7 @@
 		function mailingsRemoveSingle($id) {
 			return $this->delete("/mailings/{$id}");
 		}
-		
+
 		/**
 		* Cancels a mailing that has a current status of pending or paused. All other statuses will result in a 404.
 		* @param int $id	ID of mailing
@@ -619,7 +707,7 @@
 		function mailingsCanceledQueued($id) {
 			return $this->delete("/mailings/cancel/{$id}");
 		}
-		
+
 		/**
 		* Forward a previous message to additional recipients. If these recipients are not already in the audience, they will be added with a status of FORWARDED.
 		* @param int $id		ID of mailing
@@ -631,7 +719,7 @@
 		function mailingsForward($id, $member_id, $params = array()) {
 			return $this->post("/forwards/{$id}/{$member_id}", $params);
 		}
-		
+
 		/**
 		* Send a prior mailing to additional recipients. A new mailing will be created that inherits its content from the original.
 		* @param int $id		ID of mailing
@@ -642,7 +730,7 @@
 		function mailingsSendExisting($id, $params = array()) {
 			return $this->post("/mailings/{$id}", $params);
 		}
-		
+
 		/**
 		* Get heads up email address(es) related to a mailing.
 		* @param int $id	ID of mailing
@@ -653,7 +741,7 @@
 		function mailingsHeadsup($id, $params = array()) {
 			return $this->get("/mailings/{$id}/headsup", $params);
 		}
-		
+
 		/**
 		* Validate that a mailing has valid personalization-tag syntax. Checks tag syntax in three params:
 		* @param array $params Array of params
@@ -663,10 +751,10 @@
 		function mailingsValidate($params = array()) {
 			return $this->post("/mailings/validate", $params);
 		}
-		
+
 		/**
-		* Declare the winner of a split test manually. In the event that the test duration has not elapsed, 
-		* the current stats for each test will be frozen and the content defined in the user declared winner will sent to the remaining members for the mailing. 
+		* Declare the winner of a split test manually. In the event that the test duration has not elapsed,
+		* the current stats for each test will be frozen and the content defined in the user declared winner will sent to the remaining members for the mailing.
 		* Please note, any messages that are pending for each of the test variations will receive the content assigned to them when the test was initially constructed.
 		* @param int $mailing_id	ID of mailing
 		* @param int $winner_id		ID of winner
@@ -676,12 +764,12 @@
 		function mailingsDeclareWinnerOfSplitTest($mailing_id, $winner_id) {
 			return $this->post("/mailings/{$mailing_id}/winner/{$winner_id}");
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Response related endpoint(s)
 		* @see http://api.myemma.com/api/external/response.html
 		*/
-		
+
 		/**
 		* Get the response summary for an account.
 		* This method will return a month-based time series of data including sends, opens, clicks, mailings, forwards, and opt-outs. Test mailings and forwards are not included in the data returned.
@@ -692,7 +780,7 @@
 		function myAccountSummary($params = array()) {
 			return $this->get("/response", $params);
 		}
-		
+
 		/**
 		* Get the response summary for a particular mailing.
 		* This method will return the counts of each type of response activity for a particular mailing.
@@ -703,7 +791,7 @@
 		function responseSingleSummary($mailing_id) {
 			return $this->get("/response/{$mailing_id}");
 		}
-		
+
 		/**
 		* Get mailing information for a particular action
 		* @param int $id			ID of Mailing
@@ -715,7 +803,7 @@
 		function responseMailingInformation($id, $action = "sends", $params = array()) {
 			return $this->get("/response/{$id}/{$action}", $params);
 		}
-		
+
 		/**
 		* Get the customer share associated with the share id.
 		* @param int $share_id			ID of share
@@ -726,7 +814,7 @@
 		function responseCustomerShareInformation($share_id, $params = array()) {
 			return $this->get("/response/{$share_id}/customer_share", $params);
 		}
-		
+
 		/**
 		* Get overview of shares pertaining to this mailing_id.
 		* @param int $id	ID of mailing
@@ -736,12 +824,12 @@
 		function responseSharesOverview($id) {
 			return $this->get("/response/{$id}/shares/overview");
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Searches related endpoint(s)
 		* @see http://api.myemma.com/api/external/searches.html
 		*/
-		
+
 		/**
 		* Retrieve a list of saved searches.
 		* @param array $params	Array of options
@@ -751,7 +839,7 @@
 		function mySearches($params = array()) {
 			return $this->get("/searches", $params);
 		}
-		
+
 		/**
 		* Get the details for a saved search.
 		* @param int $id		ID of search
@@ -762,7 +850,7 @@
 		function searchesGetById($id, $params = array()) {
 			return $this->get("/searches/{$id}", $params);
 		}
-		
+
 		/**
 		* Create a saved search
 		* @param array $params	Array of options
@@ -772,7 +860,7 @@
 		function searchesCreateSingle($params = array()) {
 			return $this->post("/searches", $params);
 		}
-		
+
 		/**
 		* Update a saved search.
 		* No parameters are required, but either the name or criteria parameter must be present for an update to occur.
@@ -784,7 +872,7 @@
 		function searchesUpdateSingle($id, $params = array()) {
 			return $this->put("/searches/{$id}", $params);
 		}
-		
+
 		/**
 		* Delete a saved search. The member records referred to by the search are not affected.
 		* @param int $id 	ID of search
@@ -794,7 +882,7 @@
 		function searchesRemoveSingle($id) {
 			return $this->delete("/searches/{$id}");
 		}
-		
+
 		/**
 		* Get the members matching the search.
 		* @param int $id 	ID of search
@@ -805,12 +893,12 @@
 		function searchesMembers($id, $params = array()) {
 			return $this->get("/searches/{$id}/members", $params);
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Triggers related endpoint(s)
 		* @see http://api.myemma.com/api/external/triggers.html
 		*/
-		
+
 		/**
 		* Get a basic listing of all triggers in an account.
 		* @param array $params	Array of options
@@ -820,7 +908,7 @@
 		function myTriggers($params = array()) {
 			return $this->get("/triggers", $params);
 		}
-		
+
 		/**
 		* Create a new trigger.
 		* @param array $params	Array of options
@@ -830,7 +918,7 @@
 		function triggersCreate($params = array()) {
 			return $this->post("/triggers", $params);
 		}
-		
+
 		/**
 		* Look up a trigger by trigger id.
 		* @param int $id	Trigger ID
@@ -840,7 +928,7 @@
 		function triggersGetSingle($id) {
 			return $this->get("/triggers/{$id}");
 		}
-		
+
 		/**
 		* Update or edit a trigger.
 		* @param int $id	Trigger ID
@@ -850,7 +938,7 @@
 		function triggersUpdateSingle($id) {
 			return $this->put("/triggers/{$id}");
 		}
-		
+
 		/**
 		* Delete a trigger.
 		* @param int $id	Trigger ID
@@ -860,7 +948,7 @@
 		function triggersRemoveSingle($id) {
 			return $this->delete("/triggers/{$id}");
 		}
-		
+
 		/**
 		* Get mailings sent by a trigger.
 		* @param int $id		Trigger ID
@@ -871,12 +959,12 @@
 		function triggersMailings($id, $params = array()) {
 			return $this->get("/triggers/{$id}/mailings", $params = array());
 		}
-		
-		/** 
+
+		/**
 		* API Calls to the Webhooks related endpoint(s)
 		* @see http://api.myemma.com/api/external/webhooks.html
 		*/
-		
+
 		/**
 		* Get a basic listing of all webhooks associated with an account.
 		* @param array $params	Array of options
@@ -886,7 +974,7 @@
 		function myWebhooks($params = array()) {
 			return $this->get("/webhooks", $params);
 		}
-		
+
 		/**
 		* Get information for a specific webhook belonging to a specific account.
 		* @param int $id	ID of webhook
@@ -896,7 +984,7 @@
 		function webhooksGetSingle($id) {
 			return $this->get("/webhooks/{$id}");
 		}
-		
+
 		/**
 		* Get a listing of all event types that are available for webhooks.
 		* @param array $params	Array of options
@@ -906,7 +994,7 @@
 		function webhooksGetEvents($params = array()) {
 			return $this->get("/webhooks/events", $params);
 		}
-		
+
 		/**
 		* Create an new webhook.
 		* @param array $params	Array of options
@@ -916,7 +1004,7 @@
 		function webhooksCreate($params = array()) {
 			return $this->post("/webhooks", $params);
 		}
-		
+
 		/**
 		* Update an existing webhook. Takes the same params as webhooksCreate.
 		* @param int $id 		ID of webhook
@@ -927,7 +1015,7 @@
 		function webhooksUpdateSingle($id, $params = array()) {
 			return $this->put("/webhooks/{$id}", $params);
 		}
-		
+
 		/**
 		* Deletes an existing webhook.
 		* @param int $id 	ID of webhook
@@ -937,7 +1025,7 @@
 		function webhooksRemoveSingle($id) {
 			return $this->delete("/webhooks/{$id}");
 		}
-		
+
 		/**
 		* Delete all webhooks registered for an account.
 		* @access public
@@ -946,7 +1034,7 @@
 		function webhooksRemoveAll() {
 			return $this->delete("/webhooks");
 		}
-		
+
 		/**
 		* Send a GET HTTP request
 		* @param string $path		Optional post data
@@ -959,7 +1047,7 @@
 			$url = $this->_constructUrl($path);
 			return $this->_request($url);
 		}
-		
+
 		/**
 		* Send a POST HTTP request
 		* @param string $path		Request path
@@ -972,7 +1060,7 @@
 			$this->_postData = array_merge($params, $this->_postData);
 			return $this->_request($url, "post");
 		}
-		
+
 		/**
 		* Send a PUT HTTP request
 		* @param string $path		Request path
@@ -985,7 +1073,7 @@
 			$this->_postData = array_merge($postData, $this->_postData);
 			return $this->_request($url, "put");
 		}
-		
+
 		/**
 		* Send a DELETE HTTP request
 		* @param string $path		Request path
@@ -998,7 +1086,7 @@
 			$url = $this->_constructUrl($path);
 			return $this->_request($url, "delete");
 		}
-		
+
 		/**
 		* Return array of available Category Endpoints
 		* @return array of available category endpoints
@@ -1007,7 +1095,7 @@
 		public function categories() {
 			return array('fields', 'groups', 'mailings', 'members', 'response', 'searches', 'triggers', 'webhooks');
 		}
-		
+
 		/**
 		* Performs the actual HTTP request using cURL
 		* @param string $url		Absolute URL to request
@@ -1021,7 +1109,7 @@
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSLVERSION, 6);
-			
+
 			if(isset($verb)) {
 				if($verb == "post") {
 					curl_setopt($ch, CURLOPT_POST, true);
@@ -1030,24 +1118,24 @@
 				}
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->_postData));
 			}
-			
+
 			$data = curl_exec($ch);
 			$info = curl_getinfo($ch);
-			
+
 			if($this->_debug) {
 				print_r($data . "\n");
 				print_r($info);
 			}
-			
+
 			curl_close($ch);
-			
+
 			if($this->_validHttpResponseCode($info['http_code'])) {
 				return $data;
 			} else {
 				throw new Emma_Invalid_Response_Exception(null, 0, $data, $info['http_code']);
 			}
 		}
-		
+
 		/**
 		* Performs the actual HTTP request using cURL
 		* @param string $path		Relative or absolute URI
@@ -1059,10 +1147,10 @@
 			$url = $this->base_url . $this->_account_id;
 			$url .= $path;
 			$url .= (count($this->_params)) ? '?' . http_build_query($this->_params) : '';
-			
+
 			return $url;
 		}
-		
+
 		/**
 		* Validate HTTP response code
 		* @param integer $code 		HTTP code
