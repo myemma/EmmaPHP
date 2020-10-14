@@ -1,6 +1,6 @@
 <?php
 
-	require_once 'emma-exceptions.php';
+	require_once 'EmmaExceptions.php';
 
 	/**
 	 * Emma API Wrapper
@@ -517,12 +517,12 @@
 			return $this->put("/groups/{$from_id}/{$to_id}/members/copy", $params);
 		}
 
-    /**
+    		/**
 		* API Calls to the Subscriptions related endpoint(s)
 		* @see https://api.myemma.com/api/external/subscriptions.html
 		*/
 
-    /**
+    		/**
 		* Get a list of all subscriptions in an account.
 		* @param array $params		Array of options
 		* @access public
@@ -542,7 +542,7 @@
 			return $this->get("/subscriptions/{$id}");
 		}
 
-    /**
+    		/**
 		* Get a list of member IDs for members subscribed to a specific subscription.
 		* @param int $id  ID of group
 		* @param array $params	Array of options
@@ -553,7 +553,7 @@
 			return $this->get("/subscriptions/{$id}/members", $params);
 		}
 
-    /**
+    		/**
 		* Get a list of member IDs for members who have opted out of a specific subscription.
 		* @param int $id		ID of group
 		* @param array $params	Array of options
@@ -564,7 +564,7 @@
 			return $this->get("/subscriptions/{$id}/optouts", $params);
 		}
 
-    /**
+    		/**
 		* Create a subscription.
 		* @param array $params		Array of options
 		* @access public
@@ -574,7 +574,7 @@
 			return $this->post("/subscriptions", $params);
 		}
 
-    /**
+    		/**
 		* Bulk subscribe members to a subscription using either a list of member IDs or a single import ID.
 		* @param array $params		Array of options
 		* @access public
@@ -584,7 +584,7 @@
 			return $this->post("/subscriptions/{$id}/members/bulk", $params);
 		}
 
-    /**
+    		/**
 		* Edit a subscription's name or description.
 		* @param int $id		ID of group
 		* @param array $params	Array of options
@@ -595,7 +595,7 @@
 			return $this->put("/subscriptions/{$id}", $params);
 		}
 
-    /**
+    		/**
 		* Delete a subscription.
 		* @param int $id		ID of group
 		* @access public
